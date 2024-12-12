@@ -1,0 +1,33 @@
+inventory = []
+try:
+    f = open("inventory.txt","r")
+    inventory = eval(f.read())
+    f.close()
+except:
+    print("Error: Autosave not working")
+def view():
+    duplication = []
+    for items in inventory:
+        if items not in duplication:
+            print(f"{inventory.count(items)}x {items}")
+            duplication.append(items)
+print("INVENTORY")
+print("="*15)
+while True:
+    userinput = input("Add[1], View[2] or Remove[3] ")
+    if userinput == "1":
+        add = input("What do you want to add? ").title()
+        inventory.append(add)
+    elif userinput == "2":
+        view()
+    elif userinput == "3":
+        remove1 = input("What do you want to remove? ").title()
+        if remove1 in inventory:
+            inventory.remove(remove1)
+        else:
+            print("Item is not in inventory!")
+            continue
+    f = open("inventory.txt","w")
+    f.write(str(inventory))
+    f.close()
+    
